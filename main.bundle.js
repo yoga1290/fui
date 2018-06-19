@@ -155,11 +155,11 @@ var DrawerComponent = /** @class */ (function () {
     DrawerComponent.prototype.ngAfterViewInit = function () {
         console.log(__WEBPACK_IMPORTED_MODULE_1_material_components_web__);
         var MDCTemporaryDrawer = __WEBPACK_IMPORTED_MODULE_1_material_components_web__["drawer"].MDCTemporaryDrawer;
-        this._drawer = new MDCTemporaryDrawer(document.querySelector('.mdc-drawer--temporary'));
+        window['_drawer'] = new MDCTemporaryDrawer(document.querySelector('.mdc-drawer--temporary'));
         // document.querySelector('.menu').addEventListener('click', () => _drawer.open = true);
     };
     DrawerComponent.prototype.openDrawer = function () {
-        this._drawer.open != this._drawer.open;
+        window['_drawer'].open != window['_drawer'].open;
     };
     DrawerComponent = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["m" /* Component */])({
