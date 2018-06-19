@@ -20,7 +20,7 @@ webpackEmptyAsyncContext.id = "./src/$$_lazy_route_resource lazy recursive";
 /***/ "./src/app/app.component.pug":
 /***/ (function(module, exports) {
 
-module.exports = "<h1>Hello</h1><div id=\"map\"></div><app-import-tool></app-import-tool>"
+module.exports = "<h1>Loading</h1><div id=\"map\"></div><app-drawer></app-drawer><app-import-tool></app-import-tool>"
 
 /***/ }),
 
@@ -75,7 +75,7 @@ var AppComponent = /** @class */ (function () {
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__app_component__ = __webpack_require__("./src/app/app.component.ts");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__land_land_component__ = __webpack_require__("./src/app/land/land.component.ts");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__import_tool_import_tool_component__ = __webpack_require__("./src/app/import-tool/import-tool.component.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__angular_common__ = __webpack_require__("./node_modules/@angular/common/esm5/common.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__drawer_drawer_component__ = __webpack_require__("./src/app/drawer/drawer.component.ts");
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -97,19 +97,76 @@ var AppModule = /** @class */ (function () {
             declarations: [
                 __WEBPACK_IMPORTED_MODULE_3__app_component__["a" /* AppComponent */],
                 __WEBPACK_IMPORTED_MODULE_4__land_land_component__["a" /* LandComponent */],
-                __WEBPACK_IMPORTED_MODULE_5__import_tool_import_tool_component__["a" /* ImportToolComponent */]
+                __WEBPACK_IMPORTED_MODULE_5__import_tool_import_tool_component__["a" /* ImportToolComponent */],
+                __WEBPACK_IMPORTED_MODULE_6__drawer_drawer_component__["a" /* DrawerComponent */]
             ],
             imports: [
                 __WEBPACK_IMPORTED_MODULE_2__angular_common_http__["a" /* HttpClientModule */],
                 __WEBPACK_IMPORTED_MODULE_0__angular_platform_browser__["a" /* BrowserModule */]
             ],
-            providers: [
-                { provide: __WEBPACK_IMPORTED_MODULE_6__angular_common__["a" /* APP_BASE_HREF */], useValue: '/fui/' }
-            ],
+            providers: [],
             bootstrap: [__WEBPACK_IMPORTED_MODULE_3__app_component__["a" /* AppComponent */]]
         })
     ], AppModule);
     return AppModule;
+}());
+
+
+
+/***/ }),
+
+/***/ "./src/app/drawer/drawer.component.pug":
+/***/ (function(module, exports) {
+
+module.exports = "<aside class=\"mdc-drawer mdc-drawer--temporary mdc-typography\" id=\"drawer\"><nav class=\"mdc-drawer__drawer\"><header class=\"mdc-drawer__header\"><div class=\"mdc-drawer__header-content\">Header here</div></header><nav class=\"mdc-drawer__content mdc-list\" id=\"icon-with-text-demo\"><a class=\"mdc-list-item mdc-list-item--activated\" href=\"#\"><i class=\"material-icons mdc-list-item__graphic\" aria-hidden=\"true\">inbox</i>Inbox</a><a class=\"mdc-list-item\" href=\"#\"><i class=\"material-icons mdc-list-item__graphic\" aria-hidden=\"true\">star</i>Star</a></nav></nav></aside>"
+
+/***/ }),
+
+/***/ "./src/app/drawer/drawer.component.styl":
+/***/ (function(module, exports) {
+
+module.exports = "#drawer {\n  z-index: 4;\n}\n/*# sourceMappingURL=src/app/drawer/drawer.component.css.map */"
+
+/***/ }),
+
+/***/ "./src/app/drawer/drawer.component.ts":
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return DrawerComponent; });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__("./node_modules/@angular/core/esm5/core.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_material_components_web__ = __webpack_require__("./node_modules/material-components-web/index.js");
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+
+
+
+var DrawerComponent = /** @class */ (function () {
+    function DrawerComponent() {
+    }
+    DrawerComponent.prototype.ngOnInit = function () { };
+    DrawerComponent.prototype.ngAfterViewInit = function () {
+        console.log(__WEBPACK_IMPORTED_MODULE_1_material_components_web__);
+        var MDCTemporaryDrawer = __WEBPACK_IMPORTED_MODULE_1_material_components_web__["drawer"].MDCTemporaryDrawer;
+        var _drawer = new MDCTemporaryDrawer(document.querySelector('.mdc-drawer--temporary'));
+        document.querySelector('.menu').addEventListener('click', function () { return _drawer.open = true; });
+    };
+    DrawerComponent = __decorate([
+        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["m" /* Component */])({
+            selector: 'app-drawer',
+            template: __webpack_require__("./src/app/drawer/drawer.component.pug"),
+            styles: [__webpack_require__("./src/app/drawer/drawer.component.styl")]
+        }),
+        __metadata("design:paramtypes", [])
+    ], DrawerComponent);
+    return DrawerComponent;
 }());
 
 
@@ -170,6 +227,7 @@ function addLand(data) {
 }
 var onPolygonClickCallback = function (selectedPolygon, selectedLand) { }; //TODO NIY
 window['initMap'] = function () {
+    console.log('initMap');
     var map = new window['google'].maps.Map(document.getElementById('map'), {
         zoom: 18,
         mapTypeId: 'terrain'
@@ -180,6 +238,13 @@ var ImportToolComponent = /** @class */ (function () {
     function ImportToolComponent() {
     }
     ImportToolComponent.prototype.ngOnInit = function () {
+    };
+    ImportToolComponent.prototype.ngAfterViewInit = function () {
+        console.log('ngAfterViewInit');
+        if (window['gMapReady']) {
+            console.log('gMapReady', window['gMapReady']);
+            window['initMap']();
+        }
     };
     ImportToolComponent.prototype.importFile = function () {
         document.getElementById("import-file").click();
@@ -253,6 +318,7 @@ var LandComponent = /** @class */ (function () {
     }
     LandComponent.prototype.ngOnInit = function () {
     };
+    LandComponent.prototype.ngAfterViewInit = function () { };
     LandComponent = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["m" /* Component */])({
             selector: 'app-land',
@@ -300,6 +366,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 if (__WEBPACK_IMPORTED_MODULE_3__environments_environment__["a" /* environment */].production) {
     Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["_5" /* enableProdMode */])();
 }
+Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["_5" /* enableProdMode */])();
 Object(__WEBPACK_IMPORTED_MODULE_1__angular_platform_browser_dynamic__["a" /* platformBrowserDynamic */])().bootstrapModule(__WEBPACK_IMPORTED_MODULE_2__app_app_module__["a" /* AppModule */])
     .catch(function (err) { return console.log(err); });
 
