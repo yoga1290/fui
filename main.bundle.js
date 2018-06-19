@@ -104,7 +104,7 @@ var AppModule = /** @class */ (function () {
                 __WEBPACK_IMPORTED_MODULE_0__angular_platform_browser__["a" /* BrowserModule */]
             ],
             providers: [
-                { provide: __WEBPACK_IMPORTED_MODULE_6__angular_common__["a" /* APP_BASE_HREF */], useValue: '/fui' }
+                { provide: __WEBPACK_IMPORTED_MODULE_6__angular_common__["a" /* APP_BASE_HREF */], useValue: '/fui/' }
             ],
             bootstrap: [__WEBPACK_IMPORTED_MODULE_3__app_component__["a" /* AppComponent */]]
         })
@@ -119,7 +119,7 @@ var AppModule = /** @class */ (function () {
 /***/ "./src/app/import-tool/import-tool.component.pug":
 /***/ (function(module, exports) {
 
-module.exports = "<div id=\"import-tool\"><div class=\"mdc-fab\" (click)=\"importFile()\"><div class=\"mdc-fab__icon material-icons\">cloud_download</div></div><input type=\"file\" id=\"import-file\" [hidden]=\"true\"/></div>"
+module.exports = "<div id=\"import-tool\"><div class=\"mdc-fab\" (click)=\"importFile()\"><div class=\"mdc-fab__icon material-icons\">cloud_upload</div></div><input type=\"file\" id=\"import-file\" [hidden]=\"true\"/></div>"
 
 /***/ }),
 
@@ -159,7 +159,7 @@ function addLand(data) {
             fillColor: '#FF0000',
             fillOpacity: 0.35
         });
-        window['poly'].push(polygon);
+        // window['poly'].push(polygon)
         polygon.setMap(map);
         polygon.addListener('click', function () {
             map.setCenter(path[0]);
@@ -168,17 +168,12 @@ function addLand(data) {
     });
     map.setCenter(data[0].path[0]);
 }
-var onPolygonClickCallback = function (selectedPolygon, selectedLand) { };
+var onPolygonClickCallback = function (selectedPolygon, selectedLand) { }; //TODO NIY
 window['initMap'] = function () {
-    var pass = true;
-    var map = new window['google'].maps.Map(document.getElementById('map'), {
+    window['map'] = new window['google'].maps.Map(document.getElementById('map'), {
         zoom: 18,
         mapTypeId: 'terrain'
     });
-    window['map'] = map;
-    var txt = '';
-    // window['poly'] = []
-    //TODO
 };
 var ImportToolComponent = /** @class */ (function () {
     function ImportToolComponent() {
