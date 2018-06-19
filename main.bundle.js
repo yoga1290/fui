@@ -170,10 +170,11 @@ function addLand(data) {
 }
 var onPolygonClickCallback = function (selectedPolygon, selectedLand) { }; //TODO NIY
 window['initMap'] = function () {
-    window['map'] = new window['google'].maps.Map(document.getElementById('map'), {
+    var map = new window['google'].maps.Map(document.getElementById('map'), {
         zoom: 18,
         mapTypeId: 'terrain'
     });
+    window['map'] = map;
 };
 var ImportToolComponent = /** @class */ (function () {
     function ImportToolComponent() {
