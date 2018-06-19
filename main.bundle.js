@@ -118,14 +118,14 @@ var AppModule = /** @class */ (function () {
 /***/ "./src/app/drawer/drawer.component.pug":
 /***/ (function(module, exports) {
 
-module.exports = "<aside class=\"mdc-drawer mdc-drawer--temporary mdc-typography\" id=\"drawer\"><nav class=\"mdc-drawer__drawer\"><header class=\"mdc-drawer__header\"><div class=\"mdc-drawer__header-content\">Header here</div></header><nav class=\"mdc-drawer__content mdc-list\" id=\"icon-with-text-demo\"><a class=\"mdc-list-item mdc-list-item--activated\" href=\"#\"><i class=\"material-icons mdc-list-item__graphic\" aria-hidden=\"true\">inbox</i>Inbox</a><a class=\"mdc-list-item\" href=\"#\"><i class=\"material-icons mdc-list-item__graphic\" aria-hidden=\"true\">star</i>Star</a></nav></nav></aside>"
+module.exports = "<div id=\"drawer\"><aside class=\"mdc-drawer mdc-drawer--temporary mdc-typography\"><nav class=\"mdc-drawer__drawer\"><header class=\"mdc-drawer__header\"><div class=\"mdc-drawer__header-content\">Header here</div></header><nav class=\"mdc-drawer__content mdc-list\" id=\"icon-with-text-demo\"><a class=\"mdc-list-item mdc-list-item--activated\" href=\"#\"><i class=\"material-icons mdc-list-item__graphic\" aria-hidden=\"true\">inbox</i>Inbox</a><a class=\"mdc-list-item\" href=\"#\"><i class=\"material-icons mdc-list-item__graphic\" aria-hidden=\"true\">star</i>Star</a></nav></nav></aside><div class=\"mdc-fab\" (click)=\"openDrawer()\"><div class=\"mdc-fab__icon material-icons\">menu</div></div></div>"
 
 /***/ }),
 
 /***/ "./src/app/drawer/drawer.component.styl":
 /***/ (function(module, exports) {
 
-module.exports = "#drawer {\n  z-index: 4;\n}\n/*# sourceMappingURL=src/app/drawer/drawer.component.css.map */"
+module.exports = "#drawer {\n  z-index: 4;\n}\n.material-icons {\n  font-size: 52px;\n}\n/*# sourceMappingURL=src/app/drawer/drawer.component.css.map */"
 
 /***/ }),
 
