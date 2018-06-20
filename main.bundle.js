@@ -373,7 +373,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 
 var TabsComponent = /** @class */ (function () {
     function TabsComponent() {
-        this.ar = new Array(3).fill(0);
+        this.tabs = new Array(3).fill(0);
         this.selectedTab = -1;
     }
     TabsComponent.prototype.ngAfterViewInit = function () {
