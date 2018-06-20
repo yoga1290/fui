@@ -342,7 +342,7 @@ var CardComponent = /** @class */ (function () {
 /***/ "./src/app/tabs/tabs.component.pug":
 /***/ (function(module, exports) {
 
-module.exports = "<div id=\"tabs\"><section id=\"dynamic-demo-toolbar\"><nav class=\"mdc-tab-bar\" id=\"dynamic-tab-bar\" role=\"tablist\"><a *ngFor=\"let t of tabs; let $i=index\" [ngClass]=\"{'mdc-tab': true, 'mdc-tab--active': (selectedTab===$i)}\" role=\"tab\" aria-controls=\"panel-1\" href=\"#panel-1\">Item One</a><span class=\"mdc-tab-bar__indicator\"></span></nav></section><section><div class=\"panels\"><p *ngFor=\"let t of tabs; let $i=index\" [ngClass]=\"{ 'panel': true, 'active': (selectedTab===$i)}\" role=\"tabpanel\" aria-hidden=\"false\" [id]=\"'panel-' + $i\">Item {{$i}}</p></div><div class=\"dots\"><a *ngFor=\"let t of tabs; let $i=index\" [ngClass]=\"{ 'dot': true, 'active': (selectedTab===$i)}\" [data-trigger]=\"'panel-'+$i\" href=\"#panel-1\"></a></div></section></div>"
+module.exports = "<div id=\"tabs\"><section id=\"dynamic-demo-toolbar\"><nav class=\"mdc-tab-bar\" id=\"dynamic-tab-bar\" role=\"tablist\"><a *ngFor=\"let t of tabs; let $i=index\" [ngClass]=\"{'mdc-tab': true, 'mdc-tab--active': (selectedTab===$i)}\" role=\"tab\" aria-controls=\"panel-1\" href=\"#panel-1\">Item One</a><span class=\"mdc-tab-bar__indicator\"></span></nav></section><section><div class=\"panels\"><p *ngFor=\"let t of tabs; let $i=index\" [ngClass]=\"{ 'panel': true, 'active': (selectedTab===$i)}\" role=\"tabpanel\" aria-hidden=\"false\" [id]=\"'panel-' + $i\">Item {{$i}}</p></div><div class=\"dots\"><a *ngFor=\"let t of tabs; let $i=index\" [ngClass]=\"{ 'dot': true, 'active': (selectedTab===$i)}\" data-trigger=\"{{'panel-'+$i}}\" href=\"#panel-1\"></a></div></section></div>"
 
 /***/ }),
 
