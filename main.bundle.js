@@ -20,14 +20,14 @@ webpackEmptyAsyncContext.id = "./src/$$_lazy_route_resource lazy recursive";
 /***/ "./src/app/app.component.pug":
 /***/ (function(module, exports) {
 
-module.exports = "<h1>Loading</h1><div id=\"map\"></div><app-drawer></app-drawer><app-import-tool></app-import-tool>"
+module.exports = "<div id=\"app\"><h1>Loading</h1><div id=\"map\"></div><app-tabs></app-tabs><app-import-tool></app-import-tool></div>"
 
 /***/ }),
 
 /***/ "./src/app/app.component.styl":
 /***/ (function(module, exports) {
 
-module.exports = "#map {\n  z-index: 2;\n  position: absolute;\n  top: 0px;\n  width: 100%;\n  height: 100%;\n}\n/*# sourceMappingURL=src/app/app.component.css.map */"
+module.exports = "#map {\n  z-index: 2;\n  position: absolute;\n  top: 0px;\n  width: 100%;\n  height: 100%;\n}\n#app {\n  margin-top: 70px;\n}\n/*# sourceMappingURL=src/app/app.component.css.map */"
 
 /***/ }),
 
@@ -73,15 +73,17 @@ var AppComponent = /** @class */ (function () {
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_core__ = __webpack_require__("./node_modules/@angular/core/esm5/core.js");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__angular_common_http__ = __webpack_require__("./node_modules/@angular/common/esm5/http.js");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__app_component__ = __webpack_require__("./src/app/app.component.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__land_land_component__ = __webpack_require__("./src/app/land/land.component.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__import_tool_import_tool_component__ = __webpack_require__("./src/app/import-tool/import-tool.component.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__drawer_drawer_component__ = __webpack_require__("./src/app/drawer/drawer.component.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__import_tool_import_tool_component__ = __webpack_require__("./src/app/import-tool/import-tool.component.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__drawer_drawer_component__ = __webpack_require__("./src/app/drawer/drawer.component.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__tabs_card_card_component__ = __webpack_require__("./src/app/tabs/card/card.component.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__tabs_tabs_component__ = __webpack_require__("./src/app/tabs/tabs.component.ts");
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
     else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
     return c > 3 && r && Object.defineProperty(target, key, r), r;
 };
+
 
 
 
@@ -96,9 +98,10 @@ var AppModule = /** @class */ (function () {
         Object(__WEBPACK_IMPORTED_MODULE_1__angular_core__["E" /* NgModule */])({
             declarations: [
                 __WEBPACK_IMPORTED_MODULE_3__app_component__["a" /* AppComponent */],
-                __WEBPACK_IMPORTED_MODULE_4__land_land_component__["a" /* LandComponent */],
-                __WEBPACK_IMPORTED_MODULE_5__import_tool_import_tool_component__["a" /* ImportToolComponent */],
-                __WEBPACK_IMPORTED_MODULE_6__drawer_drawer_component__["a" /* DrawerComponent */]
+                __WEBPACK_IMPORTED_MODULE_4__import_tool_import_tool_component__["a" /* ImportToolComponent */],
+                __WEBPACK_IMPORTED_MODULE_5__drawer_drawer_component__["a" /* DrawerComponent */],
+                __WEBPACK_IMPORTED_MODULE_6__tabs_card_card_component__["a" /* CardComponent */],
+                __WEBPACK_IMPORTED_MODULE_7__tabs_tabs_component__["a" /* TabsComponent */]
             ],
             imports: [
                 __WEBPACK_IMPORTED_MODULE_2__angular_common_http__["a" /* HttpClientModule */],
@@ -286,25 +289,25 @@ var ImportToolComponent = /** @class */ (function () {
 
 /***/ }),
 
-/***/ "./src/app/land/land.component.pug":
+/***/ "./src/app/tabs/card/card.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<div id=\"land\"></div>"
+module.exports = "<p>\n  card works!\n</p>\n"
 
 /***/ }),
 
-/***/ "./src/app/land/land.component.styl":
+/***/ "./src/app/tabs/card/card.component.styl":
 /***/ (function(module, exports) {
 
-module.exports = "/*# sourceMappingURL=src/app/land/land.component.css.map */"
+module.exports = "/*# sourceMappingURL=src/app/tabs/card/card.component.css.map */"
 
 /***/ }),
 
-/***/ "./src/app/land/land.component.ts":
+/***/ "./src/app/tabs/card/card.component.ts":
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return LandComponent; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return CardComponent; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__("./node_modules/@angular/core/esm5/core.js");
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
@@ -316,21 +319,95 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 
-var LandComponent = /** @class */ (function () {
-    function LandComponent() {
+var CardComponent = /** @class */ (function () {
+    function CardComponent() {
     }
-    LandComponent.prototype.ngOnInit = function () {
+    CardComponent.prototype.ngOnInit = function () {
     };
-    LandComponent.prototype.ngAfterViewInit = function () { };
-    LandComponent = __decorate([
+    CardComponent = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["m" /* Component */])({
-            selector: 'app-land',
-            template: __webpack_require__("./src/app/land/land.component.pug"),
-            styles: [__webpack_require__("./src/app/land/land.component.styl")]
+            selector: 'app-card',
+            template: __webpack_require__("./src/app/tabs/card/card.component.html"),
+            styles: [__webpack_require__("./src/app/tabs/card/card.component.styl")]
         }),
         __metadata("design:paramtypes", [])
-    ], LandComponent);
-    return LandComponent;
+    ], CardComponent);
+    return CardComponent;
+}());
+
+
+
+/***/ }),
+
+/***/ "./src/app/tabs/tabs.component.pug":
+/***/ (function(module, exports) {
+
+module.exports = "<div id=\"tabs\"><section id=\"dynamic-demo-toolbar\"><nav class=\"mdc-tab-bar\" id=\"dynamic-tab-bar\" role=\"tablist\"><a *ngFor=\"let t in tabs; let $i=index\" [ngClass]=\"{'mdc-tab': true, 'mdc-tab--active': (selectedTab===$i)}\" role=\"tab\" aria-controls=\"panel-1\" href=\"#panel-1\">Item One</a><span class=\"mdc-tab-bar__indicator\"></span></nav></section><section><div class=\"panels\"><p *ngFor=\"let t in tabs; let $i=index\" [ngClass]=\"{ 'panel': true, 'active': (selectedTab===$i)}\" role=\"tabpanel\" aria-hidden=\"false\" [id]=\"'panel-' + $i\">Item {{$i}}</p></div><div class=\"dots\"><a *ngFor=\"let t in tabs; let $i=index\" [ngClass]=\"{ 'dot': true, 'active': (selectedTab===$i)}\" [data-trigger]=\"'panel-'+$i\" href=\"#panel-1\"></a></div></section></div>"
+
+/***/ }),
+
+/***/ "./src/app/tabs/tabs.component.styl":
+/***/ (function(module, exports) {
+
+module.exports = "/*# sourceMappingURL=src/app/tabs/tabs.component.css.map */"
+
+/***/ }),
+
+/***/ "./src/app/tabs/tabs.component.ts":
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return TabsComponent; });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__("./node_modules/@angular/core/esm5/core.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_material_components_web__ = __webpack_require__("./node_modules/material-components-web/index.js");
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+
+
+var TabsComponent = /** @class */ (function () {
+    function TabsComponent() {
+        this.ar = new Array(3).fill(0);
+        this.selectedTab = -1;
+    }
+    TabsComponent.prototype.ngAfterViewInit = function () {
+        var MDCTabBar = __WEBPACK_IMPORTED_MODULE_1_material_components_web__["tabs"].MDCTabBar;
+        var dynamicTabBar = window['dynamicTabBar'] = new MDCTabBar(document.querySelector('#dynamic-tab-bar'));
+        var dots = document.querySelector('.dots');
+        var panels = document.querySelector('.panels');
+        dynamicTabBar.tabs.forEach(function (tab) {
+            tab.preventDefaultOnClick = true;
+        });
+        dynamicTabBar.listen('MDCTabBar:change', function (_a) {
+            var tabs = _a.detail;
+            this.selectedTab = tabs.activeTabIndex;
+        });
+        dots.addEventListener('click', function (evt) {
+            if (!evt.target['classList'].contains('dot')) {
+                return;
+            }
+            evt.preventDefault();
+            var dotIndex = [].slice.call(dots.querySelectorAll('.dot')).indexOf(evt.target);
+            this.selectedTab = dotIndex;
+        });
+    };
+    TabsComponent.prototype.ngOnInit = function () {
+    };
+    TabsComponent = __decorate([
+        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["m" /* Component */])({
+            selector: 'app-tabs',
+            template: __webpack_require__("./src/app/tabs/tabs.component.pug"),
+            styles: [__webpack_require__("./src/app/tabs/tabs.component.styl")]
+        }),
+        __metadata("design:paramtypes", [])
+    ], TabsComponent);
+    return TabsComponent;
 }());
 
 
