@@ -20,7 +20,7 @@ webpackEmptyAsyncContext.id = "./src/$$_lazy_route_resource lazy recursive";
 /***/ "./src/app/app.component.pug":
 /***/ (function(module, exports) {
 
-module.exports = "<div id=\"app\"><h1>Loading</h1><div id=\"map\" (click)=\"mapUpdated()\"></div><app-import-tool (select)=\"openLand($event)\"></app-import-tool><app-overlay *ngIf=\"showOverlay\" [data]=\"overlayData\" (close)=\"showOverlay=false\"></app-overlay></div>"
+module.exports = "<div id=\"app\"><h1>Loading</h1><div id=\"map\" (click)=\"mapUpdated()\"></div><app-import-tool (select)=\"openLand($event)\"></app-import-tool><app-overlay *ngIf=\"showOverlay\" [data]=\"overlayData\" (onNewNote)=\"onNewNote($event)\" (close)=\"showOverlay=false\"></app-overlay></div>"
 
 /***/ }),
 
@@ -459,7 +459,7 @@ module.exports = "<div id=\"overlay\"><div class=\"overlay-layer\"><button class
 /***/ "./src/app/overlay/overlay.component.styl":
 /***/ (function(module, exports) {
 
-module.exports = "#overlay {\n  z-index: 5;\n  position: absolute;\n  top: 0px;\n  left: 0px;\n  width: 100%;\n  height: 100%;\n  padding: 0px;\n  margin: 0px;\n  background-color: rgba(128,128,128,0.62);\n}\n.overlay-layer {\n  position: relative;\n}\n.close {\n  float: right;\n}\n.event {\n  font-size: 53px;\n}\n/*# sourceMappingURL=src/app/overlay/overlay.component.css.map */"
+module.exports = "#overlay {\n  z-index: 5;\n  position: absolute;\n  top: 0px;\n  left: 0px;\n  width: 100%;\n  height: 100%;\n  padding: 0px;\n  margin: 0px;\n  background-color: rgba(128,128,128,0.62);\n}\n.overlay-layer {\n  position: relative;\n}\n.close {\n  float: right;\n  color: #f00;\n  font-size: 24px;\n}\n.event {\n  font-size: 53px;\n}\n/*# sourceMappingURL=src/app/overlay/overlay.component.css.map */"
 
 /***/ }),
 
@@ -469,6 +469,7 @@ module.exports = "#overlay {\n  z-index: 5;\n  position: absolute;\n  top: 0px;\
 "use strict";
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return OverlayComponent; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__("./node_modules/@angular/core/esm5/core.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_material_components_web__ = __webpack_require__("./node_modules/material-components-web/index.js");
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -479,13 +480,23 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 
+
 var OverlayComponent = /** @class */ (function () {
     function OverlayComponent() {
         this.data = {};
         this.close = new __WEBPACK_IMPORTED_MODULE_0__angular_core__["t" /* EventEmitter */]();
+        this.onNewNote = new __WEBPACK_IMPORTED_MODULE_0__angular_core__["t" /* EventEmitter */]();
         this.elId = "card-" + parseInt((Math.random() * 100).toString());
+        this.labelId = this.elId + "-label";
+        this.notes = '';
     }
     OverlayComponent.prototype.ngOnInit = function () {
+    };
+    OverlayComponent.prototype.ngAfterViewInit = function () {
+        var MDCTextField = __WEBPACK_IMPORTED_MODULE_1_material_components_web__["textField"].MDCTextField;
+        var MDCNotchedOutline = __WEBPACK_IMPORTED_MODULE_1_material_components_web__["notchedOutline"].MDCNotchedOutline;
+        var textField_videoOverlay = new MDCTextField(document.querySelector("#" + this.elId + " .mdc-text-field.video-overlay"));
+        var notchedOutline_videoOverlay = new MDCNotchedOutline(document.querySelector("#" + this.elId + " .mdc-text-field.video-overlay .mdc-notched-outline"));
     };
     __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["z" /* Input */])("data"),
@@ -495,6 +506,10 @@ var OverlayComponent = /** @class */ (function () {
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["K" /* Output */])("close"),
         __metadata("design:type", __WEBPACK_IMPORTED_MODULE_0__angular_core__["t" /* EventEmitter */])
     ], OverlayComponent.prototype, "close", void 0);
+    __decorate([
+        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["K" /* Output */])("onNewNote"),
+        __metadata("design:type", __WEBPACK_IMPORTED_MODULE_0__angular_core__["t" /* EventEmitter */])
+    ], OverlayComponent.prototype, "onNewNote", void 0);
     OverlayComponent = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["m" /* Component */])({
             selector: 'app-overlay',
