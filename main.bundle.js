@@ -492,18 +492,18 @@ var OverlayComponent = /** @class */ (function () {
         this.area = '';
     }
     OverlayComponent.prototype.ngOnInit = function () {
-        try {
-            if (this.data.path) {
-                this.area = window['google'].maps.geometry.spherical.computeArea(this.data.path);
-            }
-        }
-        catch (e) { }
     };
     OverlayComponent.prototype.ngAfterViewInit = function () {
         var MDCTextField = __WEBPACK_IMPORTED_MODULE_1_material_components_web__["textField"].MDCTextField;
         var MDCNotchedOutline = __WEBPACK_IMPORTED_MODULE_1_material_components_web__["notchedOutline"].MDCNotchedOutline;
         var textField_videoOverlay = new MDCTextField(document.querySelector("#" + this.elId + " .mdc-text-field"));
         var notchedOutline_videoOverlay = new MDCNotchedOutline(document.querySelector("#" + this.elId + " .mdc-text-field .mdc-notched-outline"));
+        try {
+            if (this.data.path) {
+                this.area = window['google'].maps.geometry.spherical.computeArea(this.data.path);
+            }
+        }
+        catch (e) { }
     };
     __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["z" /* Input */])("data"),
