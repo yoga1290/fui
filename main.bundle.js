@@ -20,7 +20,7 @@ webpackEmptyAsyncContext.id = "./src/$$_lazy_route_resource lazy recursive";
 /***/ "./src/app/app.component.pug":
 /***/ (function(module, exports) {
 
-module.exports = "<div id=\"app\"><h1>Loading</h1><div id=\"map\" (click)=\"mapUpdated()\"></div><app-import-tool (select)=\"openLand($event)\"></app-import-tool><app-overlay *ngIf=\"showOverlay\" [data]=\"overlayData\"></app-overlay></div>"
+module.exports = "<div id=\"app\"><h1>Loading</h1><div id=\"map\" (click)=\"mapUpdated()\"></div><app-import-tool (select)=\"openLand($event)\"></app-import-tool><app-overlay *ngIf=\"showOverlay\" [data]=\"overlayData\" (close)=\"showOverlay=false\"></app-overlay></div>"
 
 /***/ }),
 
@@ -447,14 +447,14 @@ var ImportToolComponent = /** @class */ (function () {
 /***/ "./src/app/overlay/overlay.component.pug":
 /***/ (function(module, exports) {
 
-module.exports = "<div id=\"overlay\"><div class=\"overlay-layer\"><div class=\"event\" *ngFor=\"let n of data.notes\">{{ n.text }}</div><button class=\"mdc-button\"><i class=\"material-icons mdc-button__icon\" aria-hidden=\"true\">add</i>Note</button><div class=\"mdc-card\" [id]=\"elId\" [hidden]=\"true\"><div class=\"mdc-card__media mdc-card__media--square\"><div class=\"mdc-card__media-content\"><div class=\"mdc-typography--headline6\">Title</div><div class=\"mdc-typography--subtitle2\">subtitle</div><div class=\"mdc-typography--body2\" *ngFor=\"let n of data.notes\">{{ n.text }}</div></div></div><div class=\"mdc-card__actions\"><div class=\"mdc-card__action-buttons\"><button class=\"mdc-button mdc-card__action mdc-card__action--button\">Action</button></div><div class=\"mdc-card__action-icons\"><i class=\"material-icons mdc-card__action mdc-card__action--icon\">share</i></div></div></div></div></div>"
+module.exports = "<div id=\"overlay\"><div class=\"overlay-layer\"><button class=\"close mdc-button\" (click)=\"close.emit()\"><i class=\"material-icons mdc-button__icon\" aria-hidden=\"true\">close</i>close</button><div class=\"event\" *ngFor=\"let n of data.notes\">{{ n.text }}</div><button class=\"mdc-button\"><i class=\"material-icons mdc-button__icon\" aria-hidden=\"true\">add</i>Note</button><div class=\"mdc-card\" [id]=\"elId\" [hidden]=\"true\"><div class=\"mdc-card__media mdc-card__media--square\"><div class=\"mdc-card__media-content\"><div class=\"mdc-typography--headline6\">Title</div><div class=\"mdc-typography--subtitle2\">subtitle</div><div class=\"mdc-typography--body2\" *ngFor=\"let n of data.notes\">{{ n.text }}</div></div></div><div class=\"mdc-card__actions\"><div class=\"mdc-card__action-buttons\"><button class=\"mdc-button mdc-card__action mdc-card__action--button\">Action</button></div><div class=\"mdc-card__action-icons\"><i class=\"material-icons mdc-card__action mdc-card__action--icon\">share</i></div></div></div></div></div>"
 
 /***/ }),
 
 /***/ "./src/app/overlay/overlay.component.styl":
 /***/ (function(module, exports) {
 
-module.exports = "#overlay {\n  z-index: 5;\n  position: absolute;\n  top: 0px;\n  left: 0px;\n  width: 100%;\n  height: 100%;\n  padding: 0px;\n  margin: 0px;\n  background-color: rgba(128,128,128,0.62);\n}\n.overlay-layer {\n  position: relative;\n}\n/*# sourceMappingURL=src/app/overlay/overlay.component.css.map */"
+module.exports = "#overlay {\n  z-index: 5;\n  position: absolute;\n  top: 0px;\n  left: 0px;\n  width: 100%;\n  height: 100%;\n  padding: 0px;\n  margin: 0px;\n  background-color: rgba(128,128,128,0.62);\n}\n.overlay-layer {\n  position: relative;\n}\n.close {\n  float: right;\n}\n/*# sourceMappingURL=src/app/overlay/overlay.component.css.map */"
 
 /***/ }),
 
@@ -477,6 +477,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 var OverlayComponent = /** @class */ (function () {
     function OverlayComponent() {
         this.data = {};
+        this.close = new __WEBPACK_IMPORTED_MODULE_0__angular_core__["t" /* EventEmitter */]();
         this.elId = "card-" + parseInt((Math.random() * 100).toString());
     }
     OverlayComponent.prototype.ngOnInit = function () {
@@ -485,6 +486,10 @@ var OverlayComponent = /** @class */ (function () {
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["z" /* Input */])("data"),
         __metadata("design:type", Object)
     ], OverlayComponent.prototype, "data", void 0);
+    __decorate([
+        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["K" /* Output */])("close"),
+        __metadata("design:type", __WEBPACK_IMPORTED_MODULE_0__angular_core__["t" /* EventEmitter */])
+    ], OverlayComponent.prototype, "close", void 0);
     OverlayComponent = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["m" /* Component */])({
             selector: 'app-overlay',
