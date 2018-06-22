@@ -20,7 +20,7 @@ webpackEmptyAsyncContext.id = "./src/$$_lazy_route_resource lazy recursive";
 /***/ "./src/app/app.component.pug":
 /***/ (function(module, exports) {
 
-module.exports = "<div id=\"app\"><h1>Loading</h1><div id=\"map\"></div><app-tabs></app-tabs><app-import-tool></app-import-tool></div>"
+module.exports = "<div id=\"app\"><h1>Loading</h1><div id=\"map\"></div><app-import-tool (select)=\"openLand($event)\"></app-import-tool><app-overlay *ngIf=\"showOverlay\"></app-overlay></div>"
 
 /***/ }),
 
@@ -47,8 +47,15 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var AppComponent = /** @class */ (function () {
     function AppComponent() {
         this.title = 'app';
+        this.showOverlay = false;
+        this.overlayData = {};
     }
     AppComponent.prototype.ngAfterViewInit = function () {
+    };
+    AppComponent.prototype.openLand = function (data) {
+        console.log(data);
+        this.showOverlay = true;
+        this.overlayData = data;
     };
     AppComponent = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["m" /* Component */])({
@@ -77,12 +84,14 @@ var AppComponent = /** @class */ (function () {
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__drawer_drawer_component__ = __webpack_require__("./src/app/drawer/drawer.component.ts");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__tabs_card_card_component__ = __webpack_require__("./src/app/tabs/card/card.component.ts");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__tabs_tabs_component__ = __webpack_require__("./src/app/tabs/tabs.component.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__overlay_overlay_component__ = __webpack_require__("./src/app/overlay/overlay.component.ts");
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
     else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
     return c > 3 && r && Object.defineProperty(target, key, r), r;
 };
+
 
 
 
@@ -101,7 +110,8 @@ var AppModule = /** @class */ (function () {
                 __WEBPACK_IMPORTED_MODULE_4__import_tool_import_tool_component__["a" /* ImportToolComponent */],
                 __WEBPACK_IMPORTED_MODULE_5__drawer_drawer_component__["a" /* DrawerComponent */],
                 __WEBPACK_IMPORTED_MODULE_6__tabs_card_card_component__["a" /* CardComponent */],
-                __WEBPACK_IMPORTED_MODULE_7__tabs_tabs_component__["a" /* TabsComponent */]
+                __WEBPACK_IMPORTED_MODULE_7__tabs_tabs_component__["a" /* TabsComponent */],
+                __WEBPACK_IMPORTED_MODULE_8__overlay_overlay_component__["a" /* OverlayComponent */]
             ],
             imports: [
                 __WEBPACK_IMPORTED_MODULE_2__angular_common_http__["a" /* HttpClientModule */],
@@ -179,6 +189,120 @@ var DrawerComponent = /** @class */ (function () {
 
 /***/ }),
 
+/***/ "./src/app/import-tool/downloadtext.ts":
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony default export */ __webpack_exports__["a"] = ({
+    // private property
+    _keyStr: "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/=",
+    // public method for encoding
+    encode: function (input) {
+        var output = "";
+        var chr1, chr2, chr3, enc1, enc2, enc3, enc4;
+        var i = 0;
+        input = this._utf8_encode(input);
+        while (i < input.length) {
+            chr1 = input.charCodeAt(i++);
+            chr2 = input.charCodeAt(i++);
+            chr3 = input.charCodeAt(i++);
+            enc1 = chr1 >> 2;
+            enc2 = ((chr1 & 3) << 4) | (chr2 >> 4);
+            enc3 = ((chr2 & 15) << 2) | (chr3 >> 6);
+            enc4 = chr3 & 63;
+            if (isNaN(chr2)) {
+                enc3 = enc4 = 64;
+            }
+            else if (isNaN(chr3)) {
+                enc4 = 64;
+            }
+            output = output +
+                this._keyStr.charAt(enc1) + this._keyStr.charAt(enc2) +
+                this._keyStr.charAt(enc3) + this._keyStr.charAt(enc4);
+        }
+        return output;
+    },
+    // public method for decoding
+    decode: function (input) {
+        var output = "";
+        var chr1, chr2, chr3;
+        var enc1, enc2, enc3, enc4;
+        var i = 0;
+        input = input.replace(/[^A-Za-z0-9\+\/\=]/g, "");
+        while (i < input.length) {
+            enc1 = this._keyStr.indexOf(input.charAt(i++));
+            enc2 = this._keyStr.indexOf(input.charAt(i++));
+            enc3 = this._keyStr.indexOf(input.charAt(i++));
+            enc4 = this._keyStr.indexOf(input.charAt(i++));
+            chr1 = (enc1 << 2) | (enc2 >> 4);
+            chr2 = ((enc2 & 15) << 4) | (enc3 >> 2);
+            chr3 = ((enc3 & 3) << 6) | enc4;
+            output = output + String.fromCharCode(chr1);
+            if (enc3 != 64) {
+                output = output + String.fromCharCode(chr2);
+            }
+            if (enc4 != 64) {
+                output = output + String.fromCharCode(chr3);
+            }
+        }
+        output = this._utf8_decode(output);
+        return output;
+    },
+    // private method for UTF-8 encoding
+    _utf8_encode: function (string) {
+        string = string.replace(/\r\n/g, "\n");
+        var utftext = "";
+        for (var n = 0; n < string.length; n++) {
+            var c = string.charCodeAt(n);
+            if (c < 128) {
+                utftext += String.fromCharCode(c);
+            }
+            else if ((c > 127) && (c < 2048)) {
+                utftext += String.fromCharCode((c >> 6) | 192);
+                utftext += String.fromCharCode((c & 63) | 128);
+            }
+            else {
+                utftext += String.fromCharCode((c >> 12) | 224);
+                utftext += String.fromCharCode(((c >> 6) & 63) | 128);
+                utftext += String.fromCharCode((c & 63) | 128);
+            }
+        }
+        return utftext;
+    },
+    // private method for UTF-8 decoding
+    _utf8_decode: function (utftext) {
+        var string = "";
+        var i = 0;
+        var c, c1, c2, c3;
+        c = c1 = c2 = 0;
+        while (i < utftext.length) {
+            c = utftext.charCodeAt(i);
+            if (c < 128) {
+                string += String.fromCharCode(c);
+                i++;
+            }
+            else if ((c > 191) && (c < 224)) {
+                c2 = utftext.charCodeAt(i + 1);
+                string += String.fromCharCode(((c & 31) << 6) | (c2 & 63));
+                i += 2;
+            }
+            else {
+                c2 = utftext.charCodeAt(i + 1);
+                c3 = utftext.charCodeAt(i + 2);
+                string += String.fromCharCode(((c & 15) << 12) | ((c2 & 63) << 6) | (c3 & 63));
+                i += 3;
+            }
+        }
+        return string;
+    },
+    downloadText: function (Text) {
+        window.location.href = "data:application/txt;charset=utf-8;base64," + this.encode(Text);
+    }
+});
+
+
+/***/ }),
+
 /***/ "./src/app/import-tool/import-tool.component.pug":
 /***/ (function(module, exports) {
 
@@ -199,6 +323,7 @@ module.exports = "#import-tool {\n  z-index: 3;\n  position: absolute;\n  bottom
 "use strict";
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return ImportToolComponent; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__("./node_modules/@angular/core/esm5/core.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__downloadtext__ = __webpack_require__("./src/app/import-tool/downloadtext.ts");
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -209,7 +334,8 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 
-function addLand(data) {
+
+function addLand(data, onPolygonClickCallback) {
     var map = window['map'];
     var colors = ['red', 'green', 'blue', 'yellow', 'orange'];
     data.forEach(function (land) {
@@ -231,7 +357,7 @@ function addLand(data) {
     });
     map.setCenter(data[0].path[0]);
 }
-var onPolygonClickCallback = function (selectedPolygon, selectedLand) { }; //TODO NIY
+// var onPolygonClickCallback = (selectedPolygon, selectedLand) => {} //TODO NIY
 window['initMap'] = function () {
     console.log('initMap');
     var map = new window['google'].maps.Map(document.getElementById('map'), {
@@ -240,8 +366,12 @@ window['initMap'] = function () {
     });
     window['map'] = map;
 };
+window['onunload'] = function () {
+    __WEBPACK_IMPORTED_MODULE_1__downloadtext__["a" /* default */].downloadText(localStorage.getItem("fui.yoga"));
+};
 var ImportToolComponent = /** @class */ (function () {
     function ImportToolComponent() {
+        this.onAreaSelect = new __WEBPACK_IMPORTED_MODULE_0__angular_core__["t" /* EventEmitter */]();
     }
     ImportToolComponent.prototype.ngOnInit = function () {
     };
@@ -253,6 +383,7 @@ var ImportToolComponent = /** @class */ (function () {
         }
     };
     ImportToolComponent.prototype.importFile = function () {
+        var _this = this;
         document.getElementById("import-file").click();
         document.getElementById("import-file").addEventListener('change', function (e) {
             var files = document.getElementById("import-file")['files'];
@@ -264,7 +395,10 @@ var ImportToolComponent = /** @class */ (function () {
                     // output.textContent = e.target.result;
                     console.log(e.target.result);
                     try {
-                        addLand(JSON.parse(e.target.result));
+                        addLand(JSON.parse(e.target.result), function (selectedPolygon, selectedLand) {
+                            _this.onAreaSelect.emit({ selectedPolygon: selectedPolygon, selectedLand: selectedLand });
+                        });
+                        localStorage.setItem("fui.yoga", e.target.result);
                     }
                     catch (e) {
                         console.log(e);
@@ -274,6 +408,10 @@ var ImportToolComponent = /** @class */ (function () {
             }
         });
     };
+    __decorate([
+        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["K" /* Output */])("select"),
+        __metadata("design:type", __WEBPACK_IMPORTED_MODULE_0__angular_core__["t" /* EventEmitter */])
+    ], ImportToolComponent.prototype, "onAreaSelect", void 0);
     ImportToolComponent = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["m" /* Component */])({
             selector: 'app-import-tool',
@@ -283,6 +421,56 @@ var ImportToolComponent = /** @class */ (function () {
         __metadata("design:paramtypes", [])
     ], ImportToolComponent);
     return ImportToolComponent;
+}());
+
+
+
+/***/ }),
+
+/***/ "./src/app/overlay/overlay.component.pug":
+/***/ (function(module, exports) {
+
+module.exports = "<div id=\"overlay\"></div>"
+
+/***/ }),
+
+/***/ "./src/app/overlay/overlay.component.styl":
+/***/ (function(module, exports) {
+
+module.exports = "/*# sourceMappingURL=src/app/overlay/overlay.component.css.map */"
+
+/***/ }),
+
+/***/ "./src/app/overlay/overlay.component.ts":
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return OverlayComponent; });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__("./node_modules/@angular/core/esm5/core.js");
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+
+var OverlayComponent = /** @class */ (function () {
+    function OverlayComponent() {
+    }
+    OverlayComponent.prototype.ngOnInit = function () {
+    };
+    OverlayComponent = __decorate([
+        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["m" /* Component */])({
+            selector: 'app-overlay',
+            template: __webpack_require__("./src/app/overlay/overlay.component.pug"),
+            styles: [__webpack_require__("./src/app/overlay/overlay.component.styl")]
+        }),
+        __metadata("design:paramtypes", [])
+    ], OverlayComponent);
+    return OverlayComponent;
 }());
 
 
@@ -342,7 +530,7 @@ var CardComponent = /** @class */ (function () {
 /***/ "./src/app/tabs/tabs.component.pug":
 /***/ (function(module, exports) {
 
-module.exports = "<div id=\"tabs\"><section id=\"dynamic-demo-toolbar\"><nav class=\"mdc-tab-bar\" id=\"dynamic-tab-bar\" role=\"tablist\"><a *ngFor=\"let t of tabs; let $i=index\" [ngClass]=\"{'mdc-tab': true, 'mdc-tab--active': (selectedTab===$i)}\" role=\"tab\" aria-controls=\"panel-1\" href=\"#panel-1\">Item One</a><span class=\"mdc-tab-bar__indicator\"></span></nav></section><section><div class=\"panels\"><p *ngFor=\"let t of tabs; let $i=index\" [ngClass]=\"{ 'panel': true, 'active': (selectedTab===$i)}\" role=\"tabpanel\" aria-hidden=\"false\" [id]=\"'panel-' + $i\">Item {{$i}}</p></div><div class=\"dots\"><a *ngFor=\"let t of tabs; let $i=index\" [ngClass]=\"{ 'dot': true, 'active': (selectedTab===$i)}\" [attr.data-trigger]=\"'panel-'+$i\" href=\"#panel-1\"></a></div></section></div>"
+module.exports = "<div id=\"tabs\"><section id=\"dynamic-demo-toolbar\"><nav class=\"mdc-tab-bar\" id=\"dynamic-tab-bar\" role=\"tablist\"><a *ngFor=\"let tab of tabs; let $i=index\" [ngClass]=\"{'mdc-tab': true, 'mdc-tab--active': (selectedTab===$i)}\" role=\"tab\" aria-controls=\"panel-1\" href=\"#panel-1\">{{tab}}</a><span class=\"mdc-tab-bar__indicator\"></span></nav></section><section><div class=\"panels\"><p *ngFor=\"let t of tabs; let $i=index\" [ngClass]=\"{ 'panel': true, 'active': (selectedTab===$i)}\" role=\"tabpanel\" aria-hidden=\"false\" [id]=\"'panel-' + $i\">Item {{$i}}</p></div><div class=\"dots\"><a *ngFor=\"let t of tabs; let $i=index\" [ngClass]=\"{ 'dot': true, 'active': (selectedTab===$i)}\" [attr.data-trigger]=\"'panel-'+$i\" href=\"#panel-1\"></a></div></section></div>"
 
 /***/ }),
 
@@ -373,7 +561,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 
 var TabsComponent = /** @class */ (function () {
     function TabsComponent() {
-        this.tabs = new Array(3).fill(0);
+        this.tabs = ['Map', 'Cards'];
         this.selectedTab = -1;
     }
     TabsComponent.prototype.ngAfterViewInit = function () {
@@ -444,9 +632,9 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
 
 if (__WEBPACK_IMPORTED_MODULE_3__environments_environment__["a" /* environment */].production) {
-    Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["_5" /* enableProdMode */])();
+    Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["_6" /* enableProdMode */])();
 }
-Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["_5" /* enableProdMode */])();
+Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["_6" /* enableProdMode */])();
 Object(__WEBPACK_IMPORTED_MODULE_1__angular_platform_browser_dynamic__["a" /* platformBrowserDynamic */])().bootstrapModule(__WEBPACK_IMPORTED_MODULE_2__app_app_module__["a" /* AppModule */])
     .catch(function (err) { return console.log(err); });
 
