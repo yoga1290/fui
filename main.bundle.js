@@ -445,7 +445,7 @@ var ImportToolComponent = /** @class */ (function () {
 /***/ "./src/app/overlay/overlay.component.pug":
 /***/ (function(module, exports) {
 
-module.exports = "<div id=\"overlay\"><div class=\"overlay-layer\"></div><div class=\"mdc-card\" [id]=\"elId\"><div class=\"mdc-card__media mdc-card__media--square\"><div class=\"mdc-card__media-content\"><div class=\"mdc-typography--headline6\">Title</div><div class=\"mdc-typography--subtitle2\">subtitle</div><div class=\"mdc-typography--body2\" *ngFor=\"let e in data.events\">{{ e.description }}</div></div></div><div class=\"mdc-card__actions\"><div class=\"mdc-card__action-buttons\"><button class=\"mdc-button mdc-card__action mdc-card__action--button\">Action</button></div><div class=\"mdc-card__action-icons\"><i class=\"material-icons mdc-card__action mdc-card__action--icon\">share</i></div></div></div></div>"
+module.exports = "<div id=\"overlay\"><div class=\"overlay-layer\"></div><div class=\"mdc-card\" [id]=\"elId\"><div class=\"mdc-card__media mdc-card__media--square\"><div class=\"mdc-card__media-content\"><div class=\"mdc-typography--headline6\">Title</div><div class=\"mdc-typography--subtitle2\">subtitle</div><div class=\"mdc-typography--body2\" *ngFor=\"let e of data.events\">{{ e.description }}</div></div></div><div class=\"mdc-card__actions\"><div class=\"mdc-card__action-buttons\"><button class=\"mdc-button mdc-card__action mdc-card__action--button\">Action</button></div><div class=\"mdc-card__action-icons\"><i class=\"material-icons mdc-card__action mdc-card__action--icon\">share</i></div></div></div></div>"
 
 /***/ }),
 
