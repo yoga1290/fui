@@ -482,13 +482,13 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 
 
 var OverlayComponent = /** @class */ (function () {
+    // notes = ''
     function OverlayComponent() {
         this.data = {};
         this.close = new __WEBPACK_IMPORTED_MODULE_0__angular_core__["t" /* EventEmitter */]();
         this.onNewNote = new __WEBPACK_IMPORTED_MODULE_0__angular_core__["t" /* EventEmitter */]();
         this.elId = "card-" + parseInt((Math.random() * 100).toString());
         this.labelId = this.elId + "-label";
-        this.notes = '';
     }
     OverlayComponent.prototype.ngOnInit = function () {
     };
