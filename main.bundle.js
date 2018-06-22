@@ -492,9 +492,12 @@ var OverlayComponent = /** @class */ (function () {
         this.area = '';
     }
     OverlayComponent.prototype.ngOnInit = function () {
-        if (this.data.path) {
-            this.area = window['google'].maps.geometry.spherical.computeArea(this.data.path);
+        try {
+            if (this.data.path) {
+                this.area = window['google'].maps.geometry.spherical.computeArea(this.data.path);
+            }
         }
+        catch (e) { }
     };
     OverlayComponent.prototype.ngAfterViewInit = function () {
         var MDCTextField = __WEBPACK_IMPORTED_MODULE_1_material_components_web__["textField"].MDCTextField;
