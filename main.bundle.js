@@ -442,14 +442,14 @@ var ImportToolComponent = /** @class */ (function () {
 /***/ "./src/app/overlay/overlay.component.pug":
 /***/ (function(module, exports) {
 
-module.exports = "<div id=\"overlay\"><div class=\"overlay-layer\"></div><div class=\"mdc-card\" [id]=\"elId\"><div class=\"mdc-card__media mdc-card__media--square\"><div class=\"mdc-card__media-content\"><div class=\"mdc-typography--headline6\">Title</div><div class=\"mdc-typography--subtitle2\">subtitle</div><div class=\"mdc-typography--body2\" *ngFor=\"let e of data.events\">{{ e.description }}</div></div></div><div class=\"mdc-card__actions\"><div class=\"mdc-card__action-buttons\"><button class=\"mdc-button mdc-card__action mdc-card__action--button\">Action</button></div><div class=\"mdc-card__action-icons\"><i class=\"material-icons mdc-card__action mdc-card__action--icon\">share</i></div></div></div></div>"
+module.exports = "<div id=\"overlay\"><div class=\"overlay-layer\"><div class=\"event\" *ngFor=\"let e of data.events\">{{ e.description }}</div><div class=\"mdc-card\" [id]=\"elId\" [hidden]=\"true\"><div class=\"mdc-card__media mdc-card__media--square\"><div class=\"mdc-card__media-content\"><div class=\"mdc-typography--headline6\">Title</div><div class=\"mdc-typography--subtitle2\">subtitle</div><div class=\"mdc-typography--body2\" *ngFor=\"let e of data.events\">{{ e.description }}</div></div></div><div class=\"mdc-card__actions\"><div class=\"mdc-card__action-buttons\"><button class=\"mdc-button mdc-card__action mdc-card__action--button\">Action</button></div><div class=\"mdc-card__action-icons\"><i class=\"material-icons mdc-card__action mdc-card__action--icon\">share</i></div></div></div></div></div>"
 
 /***/ }),
 
 /***/ "./src/app/overlay/overlay.component.styl":
 /***/ (function(module, exports) {
 
-module.exports = "#overlay {\n  z-index: 5;\n  position: absolute;\n  top: 0px;\n  left: 0px;\n  padding: 0px;\n  margin: 0px;\n}\n.overlay-layer {\n  position: relative;\n  width: 100%;\n  height: 100%;\n  background-color: rgba(128,128,128,0.62);\n}\n/*# sourceMappingURL=src/app/overlay/overlay.component.css.map */"
+module.exports = "#overlay {\n  z-index: 5;\n  position: fixed;\n  top: 0px;\n  left: 0px;\n  width: 100%;\n  height: 100%;\n  padding: 0px;\n  margin: 0px;\n}\n.overlay-layer {\n  position: relative;\n  background-color: rgba(128,128,128,0.62);\n}\n/*# sourceMappingURL=src/app/overlay/overlay.component.css.map */"
 
 /***/ }),
 
