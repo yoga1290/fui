@@ -452,7 +452,7 @@ var ImportToolComponent = /** @class */ (function () {
 /***/ "./src/app/overlay/overlay.component.pug":
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"overlay\" [id]=\"elId\"><div class=\"overlay-layer\"><button class=\"close mdc-button\" (click)=\"close.emit()\"><i class=\"material-icons mdc-button__icon\" aria-hidden=\"true\">close</i>close</button><div class=\"event\" *ngFor=\"let n of data.notes\">{{ n.text }}</div><div class=\"mdc-text-field mdc-text-field--outlined\"><input class=\"mdc-text-field__input\" type=\"text\" [id]=\"labelId\"/><label class=\"mdc-floating-label\" [for]=\"labelId\">Note</label><div class=\"mdc-notched-outline\"><svg><path class=\"mdc-notched-outline__path\"></path></svg></div><div class=\"mdc-notched-outline__idle\"></div></div><button class=\"mdc-button\" (click)=\"onNewNote.emit(notes)\"><i class=\"material-icons mdc-button__icon\" aria-hidden=\"true\">add</i>Note</button><div class=\"mdc-card\" [hidden]=\"true\"><div class=\"mdc-card__media mdc-card__media--square\"><div class=\"mdc-card__media-content\"><div class=\"mdc-typography--headline6\">Title</div><div class=\"mdc-typography--subtitle2\">subtitle</div><div class=\"mdc-typography--body2\" *ngFor=\"let n of data.notes\">{{ n.text }}</div></div></div><div class=\"mdc-card__actions\"><div class=\"mdc-card__action-buttons\"><button class=\"mdc-button mdc-card__action mdc-card__action--button\">Action</button></div><div class=\"mdc-card__action-icons\"><i class=\"material-icons mdc-card__action mdc-card__action--icon\">share</i></div></div></div></div></div>"
+module.exports = "<div class=\"overlay\" [id]=\"elId\"><div class=\"overlay-layer\"><button class=\"close mdc-button\" (click)=\"close.emit()\"><i class=\"material-icons mdc-button__icon\" aria-hidden=\"true\">close</i>close</button><h1 class=\"title\">{{data.path}}</h1><div class=\"event\" *ngFor=\"let n of data.notes\">{{ n.text }}</div><div class=\"mdc-text-field mdc-text-field--outlined\"><input class=\"mdc-text-field__input\" type=\"text\" [id]=\"labelId\"/><label class=\"mdc-floating-label\" [for]=\"labelId\">Note</label><div class=\"mdc-notched-outline\"><svg><path class=\"mdc-notched-outline__path\"></path></svg></div><div class=\"mdc-notched-outline__idle\"></div></div><button class=\"mdc-button\" (click)=\"onNewNote.emit(notes)\"><i class=\"material-icons mdc-button__icon\" aria-hidden=\"true\">add</i>Note</button><div class=\"mdc-card\" [hidden]=\"true\"><div class=\"mdc-card__media mdc-card__media--square\"><div class=\"mdc-card__media-content\"><div class=\"mdc-typography--headline6\">Title</div><div class=\"mdc-typography--subtitle2\">subtitle</div><div class=\"mdc-typography--body2\" *ngFor=\"let n of data.notes\">{{ n.text }}</div></div></div><div class=\"mdc-card__actions\"><div class=\"mdc-card__action-buttons\"><button class=\"mdc-button mdc-card__action mdc-card__action--button\">Action</button></div><div class=\"mdc-card__action-icons\"><i class=\"material-icons mdc-card__action mdc-card__action--icon\">share</i></div></div></div></div></div>"
 
 /***/ }),
 
@@ -482,15 +482,19 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 
 
 var OverlayComponent = /** @class */ (function () {
-    // notes = ''
     function OverlayComponent() {
         this.data = {};
         this.close = new __WEBPACK_IMPORTED_MODULE_0__angular_core__["t" /* EventEmitter */]();
         this.onNewNote = new __WEBPACK_IMPORTED_MODULE_0__angular_core__["t" /* EventEmitter */]();
         this.elId = "card-" + parseInt((Math.random() * 100).toString());
         this.labelId = this.elId + "-label";
+        this.note = '';
+        this.area = '';
     }
     OverlayComponent.prototype.ngOnInit = function () {
+        if (this.data.path) {
+            this.area = window['google'].maps.geometry.spherical.computeArea(this.data.path);
+        }
     };
     OverlayComponent.prototype.ngAfterViewInit = function () {
         var MDCTextField = __WEBPACK_IMPORTED_MODULE_1_material_components_web__["textField"].MDCTextField;
