@@ -49,6 +49,7 @@ var AppComponent = /** @class */ (function () {
         this.title = 'app';
         this.showOverlay = false;
         this.overlayData = {};
+        this.selectedLandIndex = -1;
     }
     AppComponent.prototype.ngAfterViewInit = function () {
     };
@@ -57,10 +58,14 @@ var AppComponent = /** @class */ (function () {
         // this.showOverlay = true
     };
     AppComponent.prototype.openLand = function (_a) {
-        var selectedPolygon = _a.selectedPolygon, selectedLand = _a.selectedLand;
+        var index = _a.index, selectedPolygon = _a.selectedPolygon, selectedLand = _a.selectedLand;
         console.log(selectedLand);
         this.showOverlay = true;
+        this.selectedLandIndex = index;
         this.overlayData = selectedLand;
+    };
+    AppComponent.prototype.onNewNote = function (note) {
+        console.log(this.selectedLandIndex, note);
     };
     AppComponent = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["m" /* Component */])({
@@ -311,14 +316,14 @@ var DrawerComponent = /** @class */ (function () {
 /***/ "./src/app/import-tool/import-tool.component.pug":
 /***/ (function(module, exports) {
 
-module.exports = "<div id=\"import-tool\"><div class=\"mdc-fab\" (click)=\"importFile()\"><div class=\"mdc-fab__icon material-icons\">cloud_upload</div></div><input type=\"file\" id=\"import-file\" [hidden]=\"true\"/></div>"
+module.exports = "<div id=\"import-tool\"><div class=\"mdc-fab\" (click)=\"importFile()\"><div class=\"mdc-fab__icon material-icons\">cloud_upload</div></div><input type=\"file\" id=\"import-file\" [hidden]=\"true\"/><div class=\"mdc-fab download\" (click)=\"downloadFile()\"><div class=\"mdc-fab__icon material-icons\">cloud_download</div></div></div>"
 
 /***/ }),
 
 /***/ "./src/app/import-tool/import-tool.component.styl":
 /***/ (function(module, exports) {
 
-module.exports = "#import-tool {\n  z-index: 3;\n  position: absolute;\n  bottom: 0px;\n}\n.material-icons {\n  font-size: 52px;\n}\n/*# sourceMappingURL=src/app/import-tool/import-tool.component.css.map */"
+module.exports = "#import-tool {\n  z-index: 3;\n  position: absolute;\n  bottom: 0px;\n  width: 100%;\n}\n.material-icons {\n  font-size: 52px;\n}\n.download {\n  float: right;\n}\n/*# sourceMappingURL=src/app/import-tool/import-tool.component.css.map */"
 
 /***/ }),
 
@@ -354,7 +359,7 @@ function addLand(data, onPolygonClickCallback) {
     //   return land
     // })
     data
-        .forEach(function (land) {
+        .forEach(function (land, index) {
         var path = land.path;
         var polygon = new window['google'].maps.Polygon({
             paths: path,
@@ -368,7 +373,7 @@ function addLand(data, onPolygonClickCallback) {
         polygon.setMap(map);
         polygon.addListener('click', function () {
             map.setCenter(path[0]);
-            onPolygonClickCallback(polygon, land);
+            onPolygonClickCallback(index, polygon, land);
         });
     });
     map.setCenter(data[0].path[0]);
@@ -381,9 +386,6 @@ window['initMap'] = function () {
         mapTypeId: 'terrain'
     });
     window['map'] = map;
-};
-window.document.body['onunload'] = function () {
-    __WEBPACK_IMPORTED_MODULE_1__downloadtext__["a" /* default */].downloadText(localStorage.getItem("fui.yoga"));
 };
 var ImportToolComponent = /** @class */ (function () {
     function ImportToolComponent() {
@@ -411,8 +413,8 @@ var ImportToolComponent = /** @class */ (function () {
                     // output.textContent = e.target.result;
                     console.log(e.target.result);
                     try {
-                        addLand(JSON.parse(e.target.result), function (selectedPolygon, selectedLand) {
-                            _this.onAreaSelect.emit({ selectedPolygon: selectedPolygon, selectedLand: selectedLand });
+                        addLand(JSON.parse(e.target.result), function (index, selectedPolygon, selectedLand) {
+                            _this.onAreaSelect.emit({ index: index, selectedPolygon: selectedPolygon, selectedLand: selectedLand });
                         });
                         localStorage.setItem("fui.yoga", e.target.result);
                     }
@@ -424,6 +426,9 @@ var ImportToolComponent = /** @class */ (function () {
                 // reader.readAsBinaryString(myFile);
             }
         });
+    };
+    ImportToolComponent.prototype.downloadFile = function () {
+        __WEBPACK_IMPORTED_MODULE_1__downloadtext__["a" /* default */].downloadText(localStorage.getItem("fui.yoga"));
     };
     __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["K" /* Output */])("select"),
@@ -454,7 +459,7 @@ module.exports = "<div id=\"overlay\"><div class=\"overlay-layer\"><button class
 /***/ "./src/app/overlay/overlay.component.styl":
 /***/ (function(module, exports) {
 
-module.exports = "#overlay {\n  z-index: 5;\n  position: absolute;\n  top: 0px;\n  left: 0px;\n  width: 100%;\n  height: 100%;\n  padding: 0px;\n  margin: 0px;\n  background-color: rgba(128,128,128,0.62);\n}\n.overlay-layer {\n  position: relative;\n}\n.close {\n  float: right;\n}\n/*# sourceMappingURL=src/app/overlay/overlay.component.css.map */"
+module.exports = "#overlay {\n  z-index: 5;\n  position: absolute;\n  top: 0px;\n  left: 0px;\n  width: 100%;\n  height: 100%;\n  padding: 0px;\n  margin: 0px;\n  background-color: rgba(128,128,128,0.62);\n}\n.overlay-layer {\n  position: relative;\n}\n.close {\n  float: right;\n}\n.event {\n  font-size: 53px;\n}\n/*# sourceMappingURL=src/app/overlay/overlay.component.css.map */"
 
 /***/ }),
 
