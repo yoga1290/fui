@@ -378,7 +378,7 @@ window['initMap'] = function () {
     });
     window['map'] = map;
 };
-window['onunload'] = function () {
+window.document.body['onunload'] = function () {
     __WEBPACK_IMPORTED_MODULE_1__downloadtext__["a" /* default */].downloadText(localStorage.getItem("fui.yoga"));
 };
 var ImportToolComponent = /** @class */ (function () {
@@ -449,7 +449,7 @@ module.exports = "<div id=\"overlay\"><div class=\"overlay-layer\"><div class=\"
 /***/ "./src/app/overlay/overlay.component.styl":
 /***/ (function(module, exports) {
 
-module.exports = "#overlay {\n  z-index: 5;\n  position: fixed;\n  top: 0px;\n  left: 0px;\n  width: 100%;\n  height: 100%;\n  padding: 0px;\n  margin: 0px;\n  background-color: rgba(128,128,128,0.62);\n}\n.overlay-layer {\n  position: relative;\n}\n/*# sourceMappingURL=src/app/overlay/overlay.component.css.map */"
+module.exports = "#overlay {\n  z-index: 5;\n  position: absolute;\n  top: 0px;\n  left: 0px;\n  width: 100%;\n  height: 100%;\n  padding: 0px;\n  margin: 0px;\n  background-color: rgba(128,128,128,0.62);\n}\n.overlay-layer {\n  position: relative;\n}\n/*# sourceMappingURL=src/app/overlay/overlay.component.css.map */"
 
 /***/ }),
 
