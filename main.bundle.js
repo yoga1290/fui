@@ -500,7 +500,10 @@ var OverlayComponent = /** @class */ (function () {
         var notchedOutline_videoOverlay = new MDCNotchedOutline(document.querySelector("#" + this.elId + " .mdc-text-field .mdc-notched-outline"));
         try {
             if (this.data.path) {
-                this.area = window['google'].maps.geometry.spherical.computeArea(this.data.path);
+                this.area = window['google'].maps.geometry.spherical.computeArea(this.data.path
+                    .map(function (el) {
+                    return { lat: function () { return el.lat; }, lng: function () { return el.lng; } };
+                }));
             }
         }
         catch (e) { }
