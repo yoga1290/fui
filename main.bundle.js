@@ -335,10 +335,23 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 
 
+// https://developers.google.com/maps/documentation/javascript/shapes#polygons
+// https://developers.google.com/maps/documentation/javascript/examples/layer-data-polygon
+// http://mathworld.wolfram.com/PolygonArea.html
+// https://developers.google.com/maps/documentation/javascript/geometry#Distance
 function addLand(data, onPolygonClickCallback) {
     var map = window['map'];
     var colors = ['red', 'green', 'blue', 'yellow', 'orange'];
-    data.forEach(function (land) {
+    // window.google.maps.geometry.spherical.computeArea(paths[0])
+    data
+        .map(function (land) {
+        land.area = window['google'].maps.geometry.spherical.computeArea(land.path);
+        return land;
+    })
+        .sort(function (a, b) {
+        return b.area - a.area;
+    })
+        .forEach(function (land) {
         var path = land.path;
         var polygon = new window['google'].maps.Polygon({
             paths: path,
