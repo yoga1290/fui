@@ -20,7 +20,7 @@ webpackEmptyAsyncContext.id = "./src/$$_lazy_route_resource lazy recursive";
 /***/ "./src/app/app.component.pug":
 /***/ (function(module, exports) {
 
-module.exports = "<div id=\"app\"><h1>Loading</h1><div id=\"map\"></div><app-import-tool (select)=\"openLand($event)\"></app-import-tool><app-overlay *ngIf=\"showOverlay\" [data]=\"overlayData\"></app-overlay></div>"
+module.exports = "<div id=\"app\"><h1>Loading</h1><div id=\"map\" (click)=\"mapUpdated()\"></div><app-import-tool (select)=\"openLand($event)\"></app-import-tool><app-overlay *ngIf=\"showOverlay\" [data]=\"overlayData\"></app-overlay></div>"
 
 /***/ }),
 
@@ -51,6 +51,10 @@ var AppComponent = /** @class */ (function () {
         this.overlayData = {};
     }
     AppComponent.prototype.ngAfterViewInit = function () {
+    };
+    AppComponent.prototype.mapUpdated = function () {
+        console.log(this.overlayData);
+        // this.showOverlay = true
     };
     AppComponent.prototype.openLand = function (_a) {
         var selectedPolygon = _a.selectedPolygon, selectedLand = _a.selectedLand;
