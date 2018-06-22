@@ -20,7 +20,7 @@ webpackEmptyAsyncContext.id = "./src/$$_lazy_route_resource lazy recursive";
 /***/ "./src/app/app.component.pug":
 /***/ (function(module, exports) {
 
-module.exports = "<div id=\"app\"><h1>Loading</h1><div id=\"map\"></div><app-import-tool (select)=\"openLand($event)\"></app-import-tool><app-overlay *ngIf=\"showOverlay\"></app-overlay></div>"
+module.exports = "<div id=\"app\"><h1>Loading</h1><div id=\"map\"></div><app-import-tool (select)=\"openLand($event)\"></app-import-tool><app-overlay *ngIf=\"showOverlay\" [data]=\"overlayData\"></app-overlay></div>"
 
 /***/ }),
 
@@ -52,10 +52,11 @@ var AppComponent = /** @class */ (function () {
     }
     AppComponent.prototype.ngAfterViewInit = function () {
     };
-    AppComponent.prototype.openLand = function (data) {
-        console.log(data);
+    AppComponent.prototype.openLand = function (_a) {
+        var selectedPolygon = _a.selectedPolygon, selectedLand = _a.selectedLand;
+        console.log(selectedLand);
         this.showOverlay = true;
-        this.overlayData = data;
+        this.overlayData = selectedLand;
     };
     AppComponent = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["m" /* Component */])({
@@ -444,14 +445,14 @@ var ImportToolComponent = /** @class */ (function () {
 /***/ "./src/app/overlay/overlay.component.pug":
 /***/ (function(module, exports) {
 
-module.exports = "<div id=\"overlay\"></div>"
+module.exports = "<div id=\"overlay\"><div class=\"overlay-layer\"></div><div class=\"mdc-card\" [id]=\"elId\"><div class=\"mdc-card__media mdc-card__media--square\"><div class=\"mdc-card__media-content\"><div class=\"mdc-typography--headline6\">Title</div><div class=\"mdc-typography--subtitle2\">subtitle</div><div class=\"mdc-typography--body2\" *ngFor=\"let e in data.events\">{{ e.description }}</div></div></div><div class=\"mdc-card__actions\"><div class=\"mdc-card__action-buttons\"><button class=\"mdc-button mdc-card__action mdc-card__action--button\">Action</button></div><div class=\"mdc-card__action-icons\"><i class=\"material-icons mdc-card__action mdc-card__action--icon\">share</i></div></div></div></div>"
 
 /***/ }),
 
 /***/ "./src/app/overlay/overlay.component.styl":
 /***/ (function(module, exports) {
 
-module.exports = "/*# sourceMappingURL=src/app/overlay/overlay.component.css.map */"
+module.exports = "#overlay {\n  z-index: 5;\n  position: absolute;\n  top: 0px;\n  left: 0px;\n  padding: 0px;\n  margin: 0px;\n}\n.overlay-layer {\n  position: relative;\n  width: 100%;\n  height: 100%;\n  background-color: rgba(128,128,128,0.62);\n}\n/*# sourceMappingURL=src/app/overlay/overlay.component.css.map */"
 
 /***/ }),
 
@@ -473,9 +474,15 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 
 var OverlayComponent = /** @class */ (function () {
     function OverlayComponent() {
+        this.data = {};
+        this.elId = "card-" + parseInt((Math.random() * 100).toString());
     }
     OverlayComponent.prototype.ngOnInit = function () {
     };
+    __decorate([
+        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["z" /* Input */])("data"),
+        __metadata("design:type", Object)
+    ], OverlayComponent.prototype, "data", void 0);
     OverlayComponent = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["m" /* Component */])({
             selector: 'app-overlay',
