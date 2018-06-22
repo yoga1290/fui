@@ -344,15 +344,12 @@ function addLand(data, onPolygonClickCallback) {
     var map = window['map'];
     var colors = ['red', 'green', 'blue', 'yellow', 'orange'];
     // window.google.maps.geometry.spherical.computeArea(paths[0])
-    data = data
-        .map(function (land) {
-        land.area = window['google'].maps.geometry.spherical.computeArea(land.path);
-        return land;
-    });
-    // add big ones first
-    data.sort(function (a, b) {
-        return b.area - a.area;
-    })
+    // data = data
+    // .map((land) => {
+    //   land.area = window['google'].maps.geometry.spherical.computeArea(land.path)
+    //   return land
+    // })
+    data
         .forEach(function (land) {
         var path = land.path;
         var polygon = new window['google'].maps.Polygon({
