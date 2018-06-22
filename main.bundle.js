@@ -420,7 +420,8 @@ var ImportToolComponent = /** @class */ (function () {
                         console.log(e);
                     }
                 });
-                reader.readAsBinaryString(myFile);
+                reader.readAsText(myFile);
+                // reader.readAsBinaryString(myFile);
             }
         });
     };
